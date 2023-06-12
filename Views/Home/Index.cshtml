@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@*<h2>Index</h2>
+
+<input type="text" id="Edata" />
+<button class="btn btn-success" onclick="RunJs()">Send</button>
+
+<script>
+    function RunJs() {
+        var ED = $('#Edata').val();
+        $.get('http://192.168.10.46/Countries/Decrypt?Text=' + ED, function (data) {
+            alert(data);
+        });
+    }
+</script>*@
