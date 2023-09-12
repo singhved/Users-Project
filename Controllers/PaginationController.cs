@@ -6,19 +6,10 @@ using System.Web.Mvc;
 
 namespace Users.Controllers
 {
-    public class HomeController : Controller
+    public class PaginationController : Controller
     {
-        // GET: Home
+        // GET: Pagination
         public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult Index2()
-        {
-            return View();
-        }
-        public ActionResult Index3()
         {
             return View();
         }
