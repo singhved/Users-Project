@@ -1,0 +1,21 @@
+﻿@{
+    int? offset = ViewBag.offset;
+    int? row = ViewBag.row;
+    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(row,offset);
+    System.Data.DataTable dt = ds.Tables[0];
+}
+
+<tbody>
+    @for (int i = 0; i < dt.Rows.Count; i++)
+    {
+        <tr>
+            <td>@(i+1)</td>
+            <td>@dt.Rows[i]["Name"].ToString()</td>
+            <td>@dt.Rows[i]["Contact"].ToString()</td>
+            <td>@dt.Rows[i]["email"].ToString()</td>
+            <td>@dt.Rows[i]["Gender"].ToString()</td>
+            <td>@dt.Rows[i]["Type"].ToString()</td>
+            <td>@dt.Rows[i]["Address"].ToString()</td>
+        </tr>
+    }
+</tbody>

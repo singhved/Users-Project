@@ -13,5 +13,11 @@ namespace Users.Controllers
         {
             return View();
         }
+        public PartialViewResult Page(int? row,int? offset)
+        {
+            ViewBag.row = row;
+            ViewBag.offset = offset;
+            return PartialView();
+        }
     }
 }

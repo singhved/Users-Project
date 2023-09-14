@@ -1,10 +1,10 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    System.Data.DataTable dt = Users.Models.AllProcs.GetUsers();
-    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(10,10);
+    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(10, 0);
+    System.Data.DataTable dt = ds.Tables[0];
+    System.Data.DataTable dt2 = ds.Tables[1];
 }
-
 
 
 <div class="row">
@@ -20,22 +20,9 @@
         </div>
     </div>
 
-    <div class="col-sm-5"></div>
 
-    <div class="col-sm-1">
-        <div class="form-group">
-            <span class="btn btn-outline-primary">10/20</span>
-        </div>
-    </div>
+    <div class="col-sm-7"></div>
 
-    <div class="col-sm-1">
-        <div class="form-group">
-            <div class="btn-group">
-                <button class="btn btn-outline-primary"><i class="fa fa-arrow-left"></i></button>
-                <button class="btn btn-outline-primary"><i class="fa fa-arrow-right"></i></button>
-            </div>
-        </div>
-    </div>
 
 
     <div class="col-sm-3">
@@ -94,4 +81,52 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="form-group">
+            <span>Total Records : </span>
+            <span class="btn btn-outline-primary" id="totrec">@dt2.Rows[0]["Total"].ToString()</span>
+        </div>
+    </div>
+    <div class="col-sm-6"></div>
+    <div class="col-sm-2">
+        <div class="form-group">
+            <div class="btn-group">
+                <button class="btn btn-outline-primary" onclick="Pagination('0')"><i class="fa fa-arrow-left"></i> Prev</button>
+                <button class="btn btn-outline-primary" onclick="Pagination('1')">Next <i class="fa fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function Pagination(way) {
+        //debugger;
+
+        var TotRec = @dt2.Rows[0]["Total"].ToString();
+        var numberofRows = 10;
+        var TotPage = (parseInt(TotRec / numberofRows) + 1);
+        var offset = (TotPage - 1) * 10;
+
+        if (way == '0') {
+            $.get('/Pagination/Page/', { offset: offset, row: numberofRows }, function (data) {
+
+                alert(data);
+            });
+        }
+
+        if (way == '1') {
+            $.get('/Pagination/Page/', { offset: offset, row: numberofRows }, function (data) {
+
+                alert(data);
+            });
+        }
+    }
+</script>
+
+
+
 
