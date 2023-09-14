@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Index";
     System.Data.DataTable dt = Users.Models.AllProcs.GetUsers();
+    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(10,10);
 }
 
 

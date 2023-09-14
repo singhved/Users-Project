@@ -29,8 +29,25 @@ namespace Users.Models
                 sd.SelectCommand = cmd;
                 sd.Fill(dt);
             }
-            catch (Exception){ }
+            catch (Exception) { }
             return dt;
+        }
+        public static DataSet Pagination(int? Row, int? Offset)
+        {
+            SqlConnection con = new SqlConnection(GetConnection);
+            SqlCommand cmd = new SqlCommand("Pagination", con);
+            cmd.Parameters.AddWithValue("@Rows", Row);
+            cmd.Parameters.AddWithValue("@Offset", Offset);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter sd = new SqlDataAdapter();
+            DataSet ds = new DataSet();
+            try
+            {
+                sd.SelectCommand = cmd;
+                sd.Fill(ds);
+            }
+            catch (Exception) { }
+            return ds;
         }
     }
 }
