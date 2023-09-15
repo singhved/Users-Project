@@ -195,6 +195,7 @@
     <Content Include="Scripts\jquery-3.6.3.min.map" />
     <Content Include="Views\Pagination\Index.cshtml" />
     <Content Include="Views\Pagination\Page.cshtml" />
+    <Content Include="Views\Pagination\Getusers.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

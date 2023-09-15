@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Users.Models;
 
 namespace Users.Controllers
 {
@@ -13,10 +14,15 @@ namespace Users.Controllers
         {
             return View();
         }
-        public PartialViewResult Page(int? row,int? offset)
+        public PartialViewResult Page(int? row, int? offset)
         {
             ViewBag.row = row;
             ViewBag.offset = offset;
+            return PartialView();
+        }
+        public PartialViewResult Getusers(string Name = null)
+        {
+            ViewBag.Name = Name;
             return PartialView();
         }
     }

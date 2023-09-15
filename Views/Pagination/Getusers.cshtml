@@ -1,0 +1,58 @@
+﻿
+@{
+    string Name = ViewBag.Name;
+    System.Data.DataTable dt = Users.Models.AllProcs.Searching();
+
+    if (string.IsNullOrEmpty(Name))
+    {
+        dt = Users.Models.AllProcs.Searching();
+    }
+    else
+    {
+        dt = Users.Models.AllProcs.Searching(Name);
+    }
+}
+
+
+<table class="table table-bordered table-striped">
+    <thead style="background-color:azure;">
+        <tr>
+            <th>
+                S.No.
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Contact
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Gender
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Address
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            <tr>
+                <td>@(i+1)</td>
+                <td>@dt.Rows[i]["Name"].ToString()</td>
+                <td>@dt.Rows[i]["Contact"].ToString()</td>
+                <td>@dt.Rows[i]["email"].ToString()</td>
+                <td>@dt.Rows[i]["Gender"].ToString()</td>
+                <td>@dt.Rows[i]["Type"].ToString()</td>
+                <td>@dt.Rows[i]["Address"].ToString()</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
