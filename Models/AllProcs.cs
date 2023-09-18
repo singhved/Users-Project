@@ -17,6 +17,7 @@ namespace Users.Models
                 return ConfigurationManager.ConnectionStrings["Context"].ConnectionString;
             }
         }
+
         //public static DataTable GetUsers()
         //{
         //    SqlConnection con = new SqlConnection(GetConnection);

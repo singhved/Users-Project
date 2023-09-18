@@ -3,61 +3,47 @@
     System.Data.DataSet ds = Users.Models.AllProcs.Pagination(10, 0);
     System.Data.DataTable dt = ds.Tables[0];
     System.Data.DataTable dt2 = ds.Tables[1];
+    string Total = @dt2.Rows[0]["Total"].ToString();
 }
 
 <div class="row">
     <div class="col-sm-2">
-        <div class="form-group">
-            <span>Show</span>
-            <select>
-                <option value="">10</option>
-                <option value="">20</option>
-                <option value="">30</option>
-            </select>
-            <span>Entry</span>
-        </div>
+        <span>Show</span>
+        <select id="TotRows" onchange="totpages(); gettable(); pagereset();">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+        </select>
+        <span>entry</span>
     </div>
 
     <div class="col-sm-7"></div>
-
+    
     <div class="col-sm-3">
         <div class="form-group">
-            <input id="Search" name="Search" class="form-control" placeholder="Type Anything..." onkeyup="Searching()" />
-            <!--<button class="btn btn-outline-primary" onclick="Searching()">-->@*Search*@<!--</button>-->
+            <input id="Search" name="Search" class="form-control" placeholder="Type Anything..." onkeyup="Seraching();" />
         </div>
     </div>
 </div>
 
-<div class="row">
+
+
+<div class="row mt-2">
     <div class="col-sm-12">
-        <div class="form-group table-responsive">
-            <table class="table table-bordered table-striped text-center" id="MyDataTable">
-                <thead style="background-color:azure;">
+        <div class="form-group table-responsive" id="GTable">
+            <table class="table table-bordered table-sm text-center">
+                <thead style=" background: aliceblue;">
                     <tr>
-                        <th>
-                            S.No.
-                        </th>
-                        <th>
-                            Name
-                        </th>
-                        <th>
-                            Contact
-                        </th>
-                        <th>
-                            Email
-                        </th>
-                        <th>
-                            Gender
-                        </th>
-                        <th>
-                            Type
-                        </th>
-                        <th>
-                            Address
-                        </th>
+                        <th>SNo.</th>
+                        <th>Name</th>
+                        <th>Conatct</th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                        <th>Type</th>
+                        <th>Address</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="MyTbody">
                     @for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         <tr>
@@ -70,6 +56,7 @@
                             <td>@dt.Rows[i]["Address"].ToString()</td>
                         </tr>
                     }
+
                 </tbody>
             </table>
         </div>
@@ -77,56 +64,83 @@
 </div>
 
 <div class="row">
-    <div class="col-sm-4">
-        <div class="form-group">
-            <span>Total Records : </span>
-            <span class="btn btn-outline-primary" id="totrec">@dt2.Rows[0]["Total"].ToString()</span>
-        </div>
-    </div>
-    <div class="col-sm-5"></div>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         <div class="form-group">
             <div class="btn-group">
-                <button class="btn btn-outline-primary" onclick="Pagination('0')"><i class="fa fa-arrow-left"></i> Prev</button>
-                <button class="btn btn-outline-primary" onclick="Pagination('1')">Next <i class="fa fa-arrow-right"></i></button>
+                <button class="btn btn-outline-dark" disabled style="opacity:1;">Records @Total</button>
+                <button class="btn btn-outline-dark" disabled style="opacity:1;">Pages <span id="CurrPage">1</span>/<span id="totalPages"></span></button>
             </div>
         </div>
     </div>
-</div>
+    <div class="col-sm-7"></div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <div class="btn-group float-end">
+                <button type="button" class="btn btn-outline-primary" onclick="pagination('0')"><i class="fa fa-arrow-left"> Prev </i></button>
+                <button type="button" class="btn btn-outline-primary" onclick="pagination('1')">Next <i class="fa fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
 
+</div>
 
 <script>
 
-    function Pagination(way) {
-        //debugger;
-        var TotRec = @dt2.Rows[0]["Total"].ToString();
-        var numberofRows = 10;
-        //var TotPage = Math.ceil(TotRec / numberofRows);
-        var TotPage = parseInt(TotRec / numberofRows);
-        var offset = (TotPage - 1) * 10;
-        if (way == '0') {
-
-            $.get('/Pagination/Page/', { offset: offset, row: numberofRows }, function (data) {
-
-            });
-        }
-        if (way == '1') {
-            $.get('/Pagination/Page/', { offset: offset, row: numberofRows }, function (data) {
-
-            });
-        }
+    function totpages() {
+        var totalReocrds = @Total;
+        var totRows = $('#TotRows').val();
+        var remainder = parseInt(totalReocrds) % parseInt(totRows);
+        var tot = parseInt(totalReocrds) / parseInt(totRows);
+        if (remainder == 0)
+            $('#totalPages').html(tot);
+        else
+            $('#totalPages').html(parseInt(tot) + 1);
     }
 
-    function Searching()
-    {
-        //debugger;
-        var Name = $('#Search').val();
-        $.get('/Pagination/Getusers', { Name: Name }, function (data) {
-            $('#MyDataTable').html(data);
+    function gettable() {
+        var totRows = $('#TotRows').val();
+        $.get('/Pagination/Page', { row: totRows }, function (data) {
+            $('#MyTbody').html(data);
         });
     }
+
+    function pagination(way) {
+        //debugger;
+        var totRows = $('#TotRows').val();
+        var CurrPage = $('#CurrPage').html();
+        var TotPages = $('#totalPages').html();
+        var newCurrPage = '';
+        // for previous button///
+        if (CurrPage != '1' && way == '0') {
+            newCurrPage = parseInt(CurrPage) - 1;
+            $('#CurrPage').html(newCurrPage);
+            var offset = (parseInt(newCurrPage) - 1) * parseInt(totRows);
+            $.get('/Pagination/Page', { row: totRows, offset: offset }, function (data) {
+                $('#MyTbody').html(data);
+            });
+        }
+        // for Next button ///
+        else if (CurrPage != TotPages && way == '1') {
+            newCurrPage = parseInt(CurrPage) + 1;
+            $('#CurrPage').html(newCurrPage);
+            var offset = parseInt(CurrPage) * parseInt(totRows);
+            $.get('/Pagination/Page', { row: totRows, offset: offset }, function (data) {
+                $('#MyTbody').html(data);
+            });
+        }
+    }
+    function pagereset() {
+        $('#CurrPage').html('1');
+    }
+
+    function Seraching() {
+        debugger;
+        var key = $('#Search').val();
+        $.get('/Pagination/Getusers', { Name: key }, function (data) {
+            $('#GTable').html(data);
+        });
+    }
+
+    totpages();
 </script>
-
-
-
 

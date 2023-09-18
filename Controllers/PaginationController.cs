@@ -14,7 +14,7 @@ namespace Users.Controllers
         {
             return View();
         }
-        public PartialViewResult Page(int? row, int? offset)
+        public PartialViewResult Page(int? row, int offset = 0)
         {
             ViewBag.row = row;
             ViewBag.offset = offset;
