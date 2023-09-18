@@ -1,7 +1,8 @@
 ﻿@{
-    int offset = ViewBag.offset;
     int? row = ViewBag.row;
-    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(row,offset);
+    int offset = ViewBag.offset;
+    string Data = ViewBag.Data;
+    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(row , offset , Data);
     System.Data.DataTable dt = ds.Tables[0];
 }
 

@@ -14,15 +14,18 @@ namespace Users.Controllers
         {
             return View();
         }
-        public PartialViewResult Page(int? row, int offset = 0)
+        public PartialViewResult Page(int? row, int offset = 0, string Data = null)
         {
             ViewBag.row = row;
             ViewBag.offset = offset;
+            ViewBag.Data = Data;
             return PartialView();
         }
-        public PartialViewResult Getusers(string Name = null)
+        public PartialViewResult Getusers(int? row, int offset = 0, string Data = null)
         {
-            ViewBag.Name = Name;
+            ViewBag.row = row;
+            ViewBag.offset = offset;
+            ViewBag.Data = Data;
             return PartialView();
         }
     }
