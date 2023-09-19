@@ -1,27 +1,19 @@
 ﻿
-@{
-    int? row = ViewBag.row;
-    int? offset = ViewBag.offset;
-    string Data = ViewBag.Data;
-    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(row, offset, Data);
-    System.Data.DataTable dt = ds.Tables[0];
+<!--@{
+//int? row = ViewBag.row;
+//int? offset = ViewBag.offset;
+//string data = ViewBag.Data;
+//System.Data.DataSet ds = Users.Models.AllProcs.Pagination(row, offset, data); // pass only data becoz ROW and OFFSET null diya h
+//System.Data.DataTable dt = ds.Tables[0];
 
-    //if (string.IsNullOrEmpty(dt.Rows[0]["Name"].ToString()))
-    //{
-    //    dt = ds.Tables[0];
-    //}
-    //else
-    //{
-    //    dt = ds.Tables[0];
-    //}
 }
 
 <div class="form-group table-responsive" id="GTable">
     <table class="table table-bordered table-sm text-center">
         <thead style=" background: aliceblue;">
             <tr>
-                <th>
-                    S.No.
+                <th>-->@*  *@
+                    <!--S.No.
                 </th>
                 <th>
                     Name
@@ -58,4 +50,4 @@
             }
         </tbody>
     </table>
-</div>
+</div>-->

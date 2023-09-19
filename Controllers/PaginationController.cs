@@ -14,19 +14,22 @@ namespace Users.Controllers
         {
             return View();
         }
-        public PartialViewResult Page(int? row, int offset = 0, string Data = null)
+        //Partial View for Pagination
+        public PartialViewResult Page(int? row, int offset = 0, string Name = null, string Address = null)
         {
             ViewBag.row = row;
             ViewBag.offset = offset;
-            ViewBag.Data = Data;
+            ViewBag.Data = Name;
+            ViewBag.Address = Address;
             return PartialView();
         }
-        public PartialViewResult Getusers(int? row, int offset = 0, string Data = null)
-        {
-            ViewBag.row = row;
-            ViewBag.offset = offset;
-            ViewBag.Data = Data;
-            return PartialView();
-        }
+        // Partial View for Searching
+        //public PartialViewResult Getusers(int? row , int? offset , string Data = null)
+        //{
+        //    ViewBag.row = row;
+        //    ViewBag.offset = offset;
+        //    ViewBag.Data = Data;
+        //    return PartialView();
+        //}
     }
 }

@@ -1,14 +1,17 @@
 ﻿@{
     int? row = ViewBag.row;
     int offset = ViewBag.offset;
-    string Data = ViewBag.Data;
-    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(row, offset, Data);
+    string Name = ViewBag.Name;
+    string Address = ViewBag.Address;
+    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(row, offset, Name, Address);  // 3 parameter nhi pas krenge kuki Data
+                                                                                   // ko null assign kiya h hai
     System.Data.DataTable dt = ds.Tables[0];
+    string tt = ds.Tables[1].Rows[0]["Total"].ToString();
 }
 
 @for (int i = 0; i < dt.Rows.Count; i++)
 {
-    int sno = offset + 1 + i;
+    int sno = offset + i + 1;
     <tr>
         <td>@sno</td>
         <td>@dt.Rows[i]["Name"].ToString()</td>
@@ -19,3 +22,20 @@
         <td>@dt.Rows[i]["Address"].ToString()</td>
     </tr>
 }
+
+
+<script>
+    function ttpages() {
+        var totalReocrds = @tt;
+        var totRows = $('#TotRows').val();
+        var remainder = parseInt(totalReocrds) % parseInt(totRows);
+        var tot = parseInt(totalReocrds) / parseInt(totRows);
+        if (remainder == 0)
+            $('#totalPages').html(tot);
+        else
+            $('#totalPages').html(parseInt(tot) + 1);
+    }
+
+    ttpages();
+    $('.tRecs').html('@tt');
+</script>

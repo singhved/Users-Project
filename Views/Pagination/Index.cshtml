@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-sm-2">
         <span>Show</span>
-        <select id="TotRows" onchange="totpages(); gettable(); pagereset();">
+        <select id="TotRows" onchange="totpages(); Seraching(); pagereset();">
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="50">50</option>
@@ -27,10 +27,9 @@
 </div>
 
 
-
 <div class="row mt-2">
     <div class="col-sm-12">
-        <div class="form-group table-responsive" id="GTable">
+        <div class="form-group table-responsive" >
             <table class="table table-bordered table-sm text-center">
                 <thead style=" background: aliceblue;">
                     <tr>
@@ -66,7 +65,7 @@
     <div class="col-sm-2">
         <div class="form-group">
             <div class="btn-group">
-                <button class="btn btn-outline-dark" disabled style="opacity:1;">Records @Total</button>
+                <button class="btn btn-outline-dark" disabled style="opacity:1;">Records <span class="tRecs">@Total</span></button>
                 <button class="btn btn-outline-dark" disabled style="opacity:1;">Pages <span id="CurrPage">1</span>/<span id="totalPages"></span></button>
             </div>
         </div>
@@ -96,15 +95,7 @@
             $('#totalPages').html(parseInt(tot) + 1);
     }
 
-    function gettable() {
-        var totRows = $('#TotRows').val();
-        $.get('/Pagination/Page', { row: totRows }, function (data) {
-            $('#MyTbody').html(data);
-        });
-    }
-
     function pagination(way) {
-        //debugger;
         var totRows = $('#TotRows').val();
         var CurrPage = $('#CurrPage').html();
         var TotPages = $('#totalPages').html();
@@ -114,9 +105,7 @@
             newCurrPage = parseInt(CurrPage) - 1;
             $('#CurrPage').html(newCurrPage);
             var offset = (parseInt(newCurrPage) - 1) * parseInt(totRows);
-            $.get('/Pagination/Page', { row: totRows, offset: offset }, function (data) {
-                $('#MyTbody').html(data);
-            });
+            Seraching(offset);
         }
 
         // for Next button ///
@@ -124,9 +113,7 @@
             newCurrPage = parseInt(CurrPage) + 1;
             $('#CurrPage').html(newCurrPage);
             var offset = parseInt(CurrPage) * parseInt(totRows);
-            $.get('/Pagination/Page', { row: totRows, offset: offset }, function (data) {
-                $('#MyTbody').html(data);
-            });
+            Seraching(offset);
         }
     }
 
@@ -134,14 +121,17 @@
         $('#CurrPage').html('1');
     }
 
-    function Seraching() {
+    function Seraching(offest = 0) {
         //debugger;
-        var key = $('#Search').val();
-            $.get('/Pagination/Getusers', { Data: key }, function (data) {
-            $('#GTable').html(data);
+        var Data = $('#Search').val() == '' ? null : $('#Search').val();
+        var totRows = $('#TotRows').val();
+        $.get('/Pagination/Page', { row: totRows, offset: offest, Data: Data }, function (data) {
+            $('#MyTbody').html(data);
         });
     }
+
     totpages();
+
 
 </script>
 
