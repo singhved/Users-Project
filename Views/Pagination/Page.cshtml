@@ -3,8 +3,7 @@
     int offset = ViewBag.offset;
     string Name = ViewBag.Name;
     string Address = ViewBag.Address;
-    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(row, offset, Name, Address);  // 3 parameter nhi pas krenge kuki Data
-                                                                                   // ko null assign kiya h hai
+    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(row, offset, Name, Address);
     System.Data.DataTable dt = ds.Tables[0];
     string tt = ds.Tables[1].Rows[0]["Total"].ToString();
 }
@@ -22,7 +21,6 @@
         <td>@dt.Rows[i]["Address"].ToString()</td>
     </tr>
 }
-
 
 <script>
     function ttpages() {
