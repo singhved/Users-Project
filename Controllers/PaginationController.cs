@@ -19,8 +19,6 @@ namespace Users.Controllers
         {
             ViewBag.row = row;
             ViewBag.offset = offset;
-            ViewBag.Data = Name;
-            ViewBag.Address = Address;
             return PartialView();
         }
         // Partial View for Searching
