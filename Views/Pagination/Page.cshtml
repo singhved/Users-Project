@@ -1,9 +1,9 @@
 ﻿@{
     int? row = ViewBag.row;
     int offset = ViewBag.offset;
-    string Name = ViewBag.Name;
+    string Data = ViewBag.Data;
     string Address = ViewBag.Address;
-    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(row, offset, Name, Address);
+    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(row,offset,);
     System.Data.DataTable dt = ds.Tables[0];
     string tt = ds.Tables[1].Rows[0]["Total"].ToString();
 }

@@ -68,12 +68,15 @@ namespace Users.Models
         //    return ds;
         //}
 
-        public static DataSet Pagination(int? Row, int? Offset)
+        public static DataSet Pagination(int? Row, int? Offset, string Columns, string Table, string Data)
         {
             SqlConnection con = new SqlConnection(GetConnection);
             SqlCommand cmd = new SqlCommand("Pagination", con);
             cmd.Parameters.AddWithValue("@Row", Row);
             cmd.Parameters.AddWithValue("@Offset", Offset);
+            cmd.Parameters.AddWithValue("@Columns", Columns);
+            cmd.Parameters.AddWithValue("@Table", Table);
+            cmd.Parameters.AddWithValue("@Data", Data);
             cmd.CommandType = CommandType.StoredProcedure;
             SqlDataAdapter sd = new SqlDataAdapter();
             DataSet ds = new DataSet();
