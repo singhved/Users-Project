@@ -19,7 +19,7 @@ namespace Users.Models
         }
 
         //public static DataTable GetUsers()
-        //{
+        ////{
         //    SqlConnection con = new SqlConnection(GetConnection);
         //    SqlCommand cmd = new SqlCommand("GetUsers", con);
         //    cmd.CommandType = CommandType.StoredProcedure;

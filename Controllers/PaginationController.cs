@@ -21,7 +21,7 @@ namespace Users.Controllers
             ViewBag.offset = offset;
             return PartialView();
         }
-        // Partial View for Searching
+        //// Partial View for Searching
         //public PartialViewResult Getusers(int? row , int? offset , string Data = null)
         //{
         //    ViewBag.row = row;
