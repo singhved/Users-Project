@@ -4,8 +4,7 @@
     string Data = ViewBag.Data;
     string Column = ViewBag.Column;
     string Table = ViewBag.Table;
-    string Address = ViewBag.Address;
-    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(row,offset,Column,Table,Data);
+    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(row , offset , Column , Table , Data);
     System.Data.DataTable dt = ds.Tables[0];
     string tt = ds.Tables[1].Rows[0]["Total"].ToString();
 }

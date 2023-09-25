@@ -24,13 +24,5 @@ namespace Users.Controllers
             ViewBag.Data = Data;
             return PartialView();
         }
-        //// Partial View for Searching
-        //public PartialViewResult Getusers(int? row , int? offset , string Data = null)
-        //{
-        //    ViewBag.row = row;
-        //    ViewBag.offset = offset;
-        //    ViewBag.Data = Data;
-        //    return PartialView();
-        //}
     }
 }
