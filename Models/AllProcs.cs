@@ -68,7 +68,7 @@ namespace Users.Models
         //    return ds;
         //}
 
-        public static DataSet Pagination(int? Row, int? Offset, string Columns, string Table, string Data)
+        public static DataSet Pagination(int? Row, int? Offset, string Columns, string Table, string Data = null)
         {
             SqlConnection con = new SqlConnection(GetConnection);
             SqlCommand cmd = new SqlCommand("Pagination", con);

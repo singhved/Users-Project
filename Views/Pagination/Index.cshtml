@@ -1,11 +1,10 @@
 ﻿@{
     ViewBag.Title = "Index";
-    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(10,0,Name,Users,ved);
+    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(10, 0, "Name", "Users");
     System.Data.DataTable dt = ds.Tables[0];
     System.Data.DataTable dt2 = ds.Tables[1];
     string Total = @dt2.Rows[0]["Total"].ToString();
 }
-/
 <div class="row">
     <div class="col-sm-2">
         <span>Show</span>
@@ -124,16 +123,10 @@
         //debugger;
         var Data = $('#Search').val() == '' ? null : $('#Search').val();
         var totRows = $('#TotRows').val();
-        $.get('/Pagination/Page', { row: totRows, offset: offest, Data: Data }, function (data) {
+        $.get('/Pagination/Page', { row: totRows, offset: offest, Data: Data, Column: Name, Table:Users }, function (data) {
             $('#MyTbody').html(data);
         });
     }
-
     totpages();
 
 </script>
-
-<button class="btn btn-outline-primary" onclick=" Click()">Click Me</button>
-
-
-
