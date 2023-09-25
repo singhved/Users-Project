@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Index";
-    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(10, 0);
+    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(10,0,);
     System.Data.DataTable dt = ds.Tables[0];
     System.Data.DataTable dt2 = ds.Tables[1];
     string Total = @dt2.Rows[0]["Total"].ToString();
