@@ -1,17 +1,17 @@
 ﻿@{
     int? row = ViewBag.row;
-    int offset = ViewBag.offset;
+    int? offset = ViewBag.offset;
     string Data = ViewBag.Data;
-    string Column = ViewBag.Column;
-    string Table = ViewBag.Table;
-    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(row , offset ,"Name","Users" , Data);
+    //string Column = ViewBag.Column;
+    //string Table = ViewBag.Table;
+    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(row , offset , "Name,Contact,Email,Type,Address", "Users" , Data);
     System.Data.DataTable dt = ds.Tables[0];
     string tt = ds.Tables[1].Rows[0]["Total"].ToString();
 }
 
 @for (int i = 0; i < dt.Rows.Count; i++)
 {
-    int sno = offset + i + 1;
+    int? sno = offset + i + 1;
     <tr>
         <td>@sno</td>
         <td>@dt.Rows[i]["Name"].ToString()</td>

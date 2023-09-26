@@ -15,11 +15,9 @@ namespace Users.Controllers
             return View();
         }
         //Partial View for Pagination
-        public PartialViewResult Page(int? row, string Column, string Table, int offset = 0, string Data = null)
+        public PartialViewResult Page(int? row, /*string Column, string Table, */int offset = 0, string Data = null)
         {
             ViewBag.row = row;
-            ViewBag.Column = Column;
-            ViewBag.Table = Table;
             ViewBag.offset = offset;
             ViewBag.Data = Data;
             return PartialView();
