@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Index";
-    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(10, 0, "Name", "Users");
+    System.Data.DataSet ds = Users.Models.AllProcs.Pagination(10, 0,"Name","Users");
     System.Data.DataTable dt = ds.Tables[0];
     System.Data.DataTable dt2 = ds.Tables[1];
     string Total = @dt2.Rows[0]["Total"].ToString();
@@ -120,13 +120,12 @@
     }
 
     function Seraching(offest = 0) {
-        //debugger;
+        /*debugger;*/
         var Data = $('#Search').val() == '' ? null : $('#Search').val();
         var totRows = $('#TotRows').val();
-        $.get('/Pagination/Page', { row: totRows, offset: offest, Data: Data, Column: Name, Table:Users }, function (data) {
+        $.get('/Pagination/Page', { row: totRows, offset: offest, Column: "Name", Table: "Users"}, function (data) {
             $('#MyTbody').html(data);
         });
     }
     totpages();
-
 </script>
